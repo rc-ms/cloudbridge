@@ -2,6 +2,7 @@
 Provider implementation based on Azure-SDK.
 """
 from cloudbridge.cloud.base import BaseCloudProvider
+from cloudbridge.cloud.providers.azure.services import AzureSecurityService
 
 
 class AzureCloudProvider(BaseCloudProvider):
@@ -10,6 +11,7 @@ class AzureCloudProvider(BaseCloudProvider):
 
     def __init__(self, config):
         super(AzureCloudProvider, self).__init__(config)
+        self._security = None
 
     @property
     def compute(self):
@@ -18,6 +20,8 @@ class AzureCloudProvider(BaseCloudProvider):
 
     @property
     def security(self):
+        if not self._security:
+            self._security = AzureSecurityService(self)
         return self._security
 
     @property
