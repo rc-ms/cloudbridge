@@ -1,9 +1,11 @@
 """
 Services implemented by the Azure provider.
 """
+from cloudbridge.cloud.base.resources import ClientPagedResultList
 from cloudbridge.cloud.base.services import BaseKeyPairService
 from cloudbridge.cloud.base.services import BaseSecurityGroupService
 from cloudbridge.cloud.base.services import BaseSecurityService
+from cloudbridge.cloud.providers.azure.resources import AzureKeyPair
 
 
 class AzureSecurityService(BaseSecurityService):
@@ -34,8 +36,12 @@ class AzureKeyPairService(BaseKeyPairService):
             "AzureCloudProvider does not implement this method")
 
     def list(self, limit=None, marker=None):
-        raise NotImplementedError(
-            "AzureCloudProvider does not implement this method")
+        certs = self.provider.sms.list_service_certificates(
+            self.provider.service_name)
+        results = [AzureKeyPair(self.provider, cert)
+                   for cert in certs]
+        return ClientPagedResultList(self.provider, results,
+                                     limit=limit, marker=marker)
 
     def find(self, name, limit=None, marker=None):
         raise NotImplementedError(
