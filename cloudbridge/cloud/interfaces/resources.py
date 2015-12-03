@@ -53,6 +53,13 @@ class CloudBridgeBaseException(Exception):
     pass
 
 
+class CreateResourceException(CloudBridgeBaseException):
+    """
+    Base class for exceptions when creating a resource
+    """
+    pass
+
+
 class WaitStateException(CloudBridgeBaseException):
 
     """
