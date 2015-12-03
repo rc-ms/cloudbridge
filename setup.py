@@ -5,7 +5,7 @@ openstack_reqs = ['python-novaclient', 'python-glanceclient',
                   'python-cinderclient', 'python-swiftclient',
                   'python-neutronclient']
 aws_reqs = ['boto']
-azure_reqs = ['azure']
+azure_reqs = ['azure', 'pyopenssl']
 full_reqs = base_reqs + aws_reqs + openstack_reqs + azure_reqs
 dev_reqs = ['tox', 'moto>=0.4.18', 'sphinx'] + full_reqs
 
