@@ -609,8 +609,11 @@ class AWSSecurityGroup(BaseSecurityGroup):
         super(AWSSecurityGroup, self).__init__(provider, security_group)
 
     @property
-    def network_id(self):
-        return self._security_group.vpc_id
+    def network(self):
+        if self._security_group.vpc_id:
+            vpc = self._provider.network.get(self._security_group.vpc_id)
+            return AWSNetwork(self._provider, vpc._vpc)
+        return None
 
     @property
     def rules(self):

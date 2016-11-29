@@ -1845,12 +1845,13 @@ class SecurityGroup(CloudResource):
         pass
 
     @abstractproperty
-    def network_id(self):
+    def network(self):
         """
         Network ID with which this security group is associated.
 
-        :rtype: ``str``
-        :return: Provider-supplied network ID or ``None`` is not available.
+        :rtype: :class:`.Network`
+        :return: Network object corresponding to the network within which this
+                 security group is defined. ``None`` is not available.
         """
         pass
 

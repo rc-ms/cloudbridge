@@ -854,7 +854,7 @@ class OpenStackSecurityGroup(BaseSecurityGroup):
         super(OpenStackSecurityGroup, self).__init__(provider, security_group)
 
     @property
-    def network_id(self):
+    def network(self):
         """
         OpenStack does not associate a SG with a network so default to None.
 
